@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ext5Test</title>
+    <script src="~/scripts/jquery-2.1.1.js"></script>
+</head>
+<body>
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+            <div>
+                <h2>All Favorites</h2>
+                <ul id="favorites" />
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+
+<script>
+        var apiUrl = '/api/favorites';
+
+        $(document).ready(function () {
+            $.getJSON(apiUrl)
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        $('<li>', { text: formatItem(item) }).appendTo($('#favorites'));
+                    });
+                });
+        });
+
+        function formatItem(item) {
+            return item.Id + ': ' + item.Name;
+        }
+
+</script>
